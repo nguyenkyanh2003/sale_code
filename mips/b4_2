@@ -1,0 +1,34 @@
+.data
+a: .asciiz "Nhap so thu nhat:"
+x: .asciiz "\nNhap so thu hai:"
+c: .asciiz "\nKet qua:"
+.text
+#in thong bao nhap số thứ nhất
+li $v0,4
+la $a0,a
+syscall
+#nhập s0
+li $v0,5
+syscall
+move $s0,$v0
+#in thông báo nhập số thứ 2
+li $v0,4
+la $a0,x
+syscall
+#nhập số thứ 2
+li $v0,5
+syscall
+move $s1,$v0
+#tinh kết quả
+add $t0,$s0,$s1
+#in thông báo kết quả
+li $v0,4
+la $a0,c
+syscall
+#in kết quả từ thanh ghi $t0
+li $v0,1
+move $a0,$t0
+syscall
+#kết thúc chương trình
+li $v0,10
+syscall

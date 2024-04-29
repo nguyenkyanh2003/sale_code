@@ -1,0 +1,29 @@
+.data
+x: .space 1000
+y: .asciiz "cong nghe thong tin viet nhat"
+.text
+#goi ham strcpy
+la $a0,x#dia chi bat dau cua x
+la $a1,y#dia chi bat dau cua y
+jal strcpy#goi ham strcpy
+#ket thuc chuong trinh
+li $v0,10
+syscall
+strcpy:
+li $s0,0 #i=0
+L1:
+add $t1,$s0,$a1 #t1=s0+a1 <=> t1=i+y[0] ,dia chi cua y[0]
+lb $t2,0($t1)#gia tri cua t2=y[i]
+add $t3,$s0,$a0 #t3=s0+a0 <=>t3=i+x[0],dia chi cua x[0]
+sb $t2,($t3)#x[i]=t2=y[i]
+beq $t2,$zero,endstrcpy
+nop
+addi $s0,$s0,1#i=i+1
+j L1
+endstrcpy:
+#hien chuoi da copy
+li $v0,4
+la $a0,x
+syscall
+
+

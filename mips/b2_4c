@@ -1,0 +1,16 @@
+.text
+li $s0,0
+li $s1,1
+li $t1,10
+li $t2,20
+li $t3,100
+starts :
+add $t0,$s0,$s1
+slti $t4,$t0,0
+bne $t4,1,else
+addi $t1,$t1,1
+add $t2,$t2,$t1
+j exit
+else: 
+add $t3,$t3,$t3
+exit:

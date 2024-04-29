@@ -1,0 +1,20 @@
+.text
+li $t1,0
+li $t2,1
+li $s1,22
+li $s2,11
+li $s3,4
+start :
+slt $t0,$t2,$t1
+bne $t0,$zero,else
+addi $s1,$s1,1
+addi $s3,$zero,1
+j   endif
+else:
+addi $s2,$s2,-1
+add $s3,$s3,$s3
+endif:
+
+
+
+

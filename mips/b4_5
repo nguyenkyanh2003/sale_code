@@ -1,0 +1,42 @@
+.data
+input_prompt: .asciiz "Nhap chuoi: "
+input_buffer: .space 21 # Bộ đệm để lưu trữ chuỗi nhập vào
+newline: .asciiz "\n" # Dấu xuống dòng để in ra màn hình
+xuat: .asciiz "Chuoi dao nguoc la: "
+.text
+main:
+ # In yêu cầu nhập chuỗi
+ li $v0, 4 # Mã gọi hệ thống để in chuỗi
+ la $a0, input_prompt # Load địa chỉ của chuỗi yêu cầu vào $a0
+ syscall # In yêu cầu nhập chuỗi
+ # Đọc chuỗi đầu vào từ người dùng
+ li $v0, 8 # Mã gọi hệ thống để đọc chuỗi
+ la $a0, input_buffer # Load địa chỉ của bộ đệm để lưu chuỗi
+ li $a1, 21 # Số lượng ký tự tối đa có thể nhập (20 ký tự + 1 ký tự null)
+ syscall # Đọc chuỗi
+ # Tính độ dài của chuỗi
+ li $t0, 0 # Khởi tạo biến đếm cho độ dài chuỗi
+tinhdodai:
+ lb $t1, input_buffer($t0) # Load một ký tự từ chuỗi
+ beqz $t1, kb_string # Nếu gặp ký tự null, kết thúc vòng lặp
+ addi $t0, $t0, 1 # Tăng biến đếm
+ j tinhdodai # Lặp lại vòng lặp để tính độ dài chuỗi
+kb_string:
+ # In chuỗi đảo ngược
+ li $v0, 4 # Mã gọi hệ thống để in chuỗi
+ la $a0, xuat # Load địa chỉ của chuỗi định dạng
+ syscall # In chuỗi định dạng
+ # In chuỗi đảo ngược
+ move $t2, $t0 # Sao chép độ dài chuỗi vào thanh ghi $t2
+loop:
+ beqz $t0, endloop # Nếu đã xử lý hết chuỗi, kết thúc vòng lặp
+ addi $t0, $t0, -1 # Giảm biến đếm
+ lb $t1, input_buffer($t0) # Load ký tự từ chuỗi ban đầu
+ li $v0, 11 # Mã gọi hệ thống để in một ký tự
+ move $a0, $t1 # Load ký tự cần in vào $a0
+ syscall # In ký tự
+ j loop # Lặp lại vòng lặp để in chuỗi đảo ngược
+endloop:
+ # Kết thúc chương trình
+ li $v0, 10 # Mã gọi hệ thống để kết thúc chương trình
+ syscall # Kết thúc chương trình

@@ -1,0 +1,9 @@
+.text
+start :
+li $s0,0x12345678 #khoi tao gia tri 0x12345678
+sra $t0,$s0,24 #dich phai duy tri dau s0 24 bit
+andi $t0,$t0,0xff #trich suat byte co trong so nho nhat luu vao t0
+andi $s0,$s0,0xffffff00 #xoa bit co trong so nho nhat cua s0 sau do luu vao s0
+ori $s0,$s0,0x0000000ff #dat byte co trong so nho nhat(LSB) thanh 0x01
+and $s0,$s0,$zero #thuc hien phep AND logic de xoa s0
+exit :

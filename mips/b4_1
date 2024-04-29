@@ -1,0 +1,6 @@
+.data
+test: .asciiz "Xin Chao" #khai báo chuỗi kí tự sử dụng chỉ thị .asciiz
+.text
+li $v0,4# đặt giá trị 4 vào thanh ghi $v0
+la $a0,test#truy cập vào địa chỉ của chuỗi test
+syscall #gọi hệ thống thực hiện nhiệm vụ của thanh ghi $v0. Với giá trị v0=4 nó yêu cầu in ra chuỗi kí tự a0

@@ -1,0 +1,17 @@
+.data
+a: .word 1,2,3,4,5,6,7,8,9
+.text
+la $s0,a
+li $s1,0#i=0
+li $s2,1#step=1
+li $s3,9 #n=9
+li $s4,0#sum=0
+loop:
+add $t0,$s1,$s1
+add $t0,$t0,$t0
+add $t0,$t0,$s0
+lw $t1,0($t0)
+add $s4,$s4,$t1
+slti $t2,$s4,0
+bne $t2,0,loop
+exit:

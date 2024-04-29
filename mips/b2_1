@@ -1,0 +1,16 @@
+.text
+   li $s2,0 #j=0
+   li $s1 , 1 #i=1
+   li $t1 , 2 #x=2
+   li $t2, 3 #y=3
+   li $t3 , 9 #z=9
+start :	
+#s2=j s1=i;
+slt $t0 , $s2, $s1 #neu j<i t0=1;
+bne $t0, $zero ,else # t0=0 thi thuc hien , neu j<i thi thuc hien cac lenh duoi khong thi nhay xuong else
+addi $t1, $t1, 1 #x=x+1
+addi $t3 ,$zero, 1 #z=1
+else:
+  addi $t2 ,$t2, -1 #y=y-1;
+  add $t3 ,$t3, $t3 #z=2*z;
+ endif:

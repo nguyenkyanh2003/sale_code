@@ -1,0 +1,25 @@
+.data 
+a: .word -4,2-11,4,-10,2
+.text
+la $s0,a
+li $s1,0#i
+li $s2,1#step
+li $s3,0#sosanh
+li $s4,6#n
+for:
+add $t0,$s1,$s1
+add $t0,$t0,$t0
+add $t0,$t0,$s0
+lw $t1,0($t0)
+abs $t2,$t1
+slt $t3,$s3,$t2
+beq $t3,1,sosanh
+j endsosanh
+sosanh:
+addi $s3,$t2,0
+endsosanh:
+add $s1,$s1,$s2
+beq $s1,$s4,endfor
+j for
+endfor:
+

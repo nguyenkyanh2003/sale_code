@@ -1,0 +1,28 @@
+.data 
+A: .asciiz "NHAP CHUOI:"
+B: .space 1000
+C: .asciiz "DO DAI CHUOI:"
+.text
+li $v0,54
+la $a0,A
+la $a1,B
+la $a2,1000
+syscall
+get_string:
+la $a0,B
+li $s0,0
+li $s1,0
+check_char:
+add $t0,$s0,$a0
+lb $t1,0($t0)
+beq $t1,$zero,end_check
+addi $s1,$s1,1
+addi $s0,$s0,1
+j check_char
+end_check:
+printf:
+addi $s1,$s1,-1
+li $v0,56
+la $a0,C
+move $a1,$s1
+syscall

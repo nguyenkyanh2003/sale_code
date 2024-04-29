@@ -1,0 +1,6 @@
+.data
+test: .asciiz "XIN CHAO"
+.text
+li $v0,55
+la $a0,test
+syscall
